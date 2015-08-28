@@ -30,6 +30,7 @@
 #' by_field %>% summarise(ave = mean(numeric.field))
 #' # See dplyr documentation for further information on data operations
 #' }
+#' @importFrom dplyr src_sql
 #' @export
 src_sqlserver <- function (server, file = NULL, database = "",
   type = "sqlserver", port = "", properties = list()) {

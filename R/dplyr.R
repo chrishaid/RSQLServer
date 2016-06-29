@@ -65,10 +65,10 @@ tbl.src_sqlserver <- function (src, from, ...) {
 # MSSQL 2008r2*: https://technet.microsoft.com/en-US/library/ms173454(v=sql.100).aspx
 # MSSQL 2012*: https://technet.microsoft.com/en-US/library/ms173454(v=sql.110).aspx
 # MSSQL 2014: https://technet.microsoft.com/en-US/library/ms173454(v=sql.120).aspx
-#' @importFrom dplyr src_translate_env sql_variant sql_translator base_scalar
+#' @importFrom dplyr sql_translate_env sql_variant sql_translator base_scalar
 #' @importFrom dplyr base_agg sql_prefix base_win
 #' @export
-src_translate_env.src_sqlserver <- function (x) {
+sql_translate_env.src_sqlserver <- function (x) {
   sql_variant(
     scalar = sql_translator(.parent = base_scalar,
       # http://sqlserverplanet.com/tsql/format-string-to-date

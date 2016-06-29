@@ -25,11 +25,11 @@
 # http://stackoverflow.com/questions/20515358/rcmd-check-unexported-objects-imported-by-calls#comment30669909_20515358
 # https://stat.ethz.ch/pipermail/r-devel/2013-August/thread.html#67180
 
-#' @importFrom dplyr translate_sql_q build_sql ident query
+#' @importFrom dplyr translate_sql_ build_sql ident query
 build_query <- function(x, limit = NULL, is_percent = NULL) {
   assertthat::assert_that(is.null(limit) || assertthat::is.number(limit))
   translate <- function(expr, ...) {
-    translate_sql_q(expr, tbl = x, env = NULL, ...)
+    translate_sql_(expr, tbl = x, env = NULL, ...)
   }
 
   if (x$summarise) {
@@ -95,7 +95,7 @@ uses_window_fun <- function(x, tbl) {
   } else {
     calls <- all_calls(x)
   }
-  win_f <- ls(envir = src_translate_env(tbl)$window)
+  win_f <- ls(envir = sql_translate_env(tbl)$window)
   any(calls %in% win_f)
 }
 
@@ -112,12 +112,12 @@ translate_window_where <- function(expr, tbl, con = NULL) {
   }
 
   # Other base case is an aggregation function --------------------------------
-  variant <- src_translate_env(tbl)
+  variant <- sql_translate_env(tbl)
   agg_f <- ls(envir = variant$window)
 
   if (is.call(expr) && as.character(expr[[1]]) %in% agg_f) {
     name <- unique_name()
-    sql <- translate_sql_q(list(expr), tbl, env = NULL, window = TRUE)
+    sql <- translate_sql_(list(expr), tbl, env = NULL, window = TRUE)
 
     return(list(expr = as.name(name), comp = setNames(list(sql), name)))
   }

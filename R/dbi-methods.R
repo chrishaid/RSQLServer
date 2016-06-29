@@ -173,6 +173,7 @@ setMethod("dbSendQuery", c("SQLServerConnection", "character"),
 })
 
 #' @rdname dbExecute
+#' @title TEST
 #' @export
 
 setMethod("dbExecute", c("SQLServerConnection", "character"),

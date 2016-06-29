@@ -4,6 +4,7 @@
 \name{dbExecute,SQLServerConnection,character-method}
 \alias{dbExecute,SQLServerConnection,character-method}
 \alias{dbSendUpdate}
+\title{TEST}
 \usage{
 \S4method{dbExecute}{SQLServerConnection,character}(conn, statement, ...,
   list = NULL)
